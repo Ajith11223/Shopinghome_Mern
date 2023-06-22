@@ -6,6 +6,8 @@ import dotenv from 'dotenv'
 
 // routes
 import AuthRoute from '../Api/Routes/AuthRoute.js'
+import ProductRoute from '../Api/Routes/ProductRoute.js'
+import CartRoute from '../Api/Routes/CartRoute.js'
 
 
 const app = express()
@@ -25,5 +27,12 @@ mongoose.connect(process.env.MONGO_DB,{useNewUrlParser:true,useUnifiedTopology:t
 then(()=> app.listen(process.env.PORT,()=> console.log(`server connectd port: ${process.env.PORT}`))).
 catch((error)=> console.log(error))
 
+// auth
 app.use('/auth',AuthRoute)
 app.use('/auth',AuthRoute)
+
+//product
+app.use('/product',ProductRoute)
+
+// cart
+app.use('/cart',CartRoute)

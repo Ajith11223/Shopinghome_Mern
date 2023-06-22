@@ -1,10 +1,19 @@
 
 import UserModel from "../Models/UserModel.js"
 import bcrypt from 'bcrypt';
+import dontenv from 'dotenv'
+
+dontenv.config()
+
+import {OAuth2Client} from 'google-auth-library'
+const client = new OAuth2Client(process.env.GOOGLE_ID);
+
+
 
 
 export const registerUser = async (req, res) => {
-    console.log(req.body)
+
+
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(req.body.password, salt)
     req.body.password = hashedPass
@@ -60,4 +69,47 @@ export const loginUser = async (req, res) => {
 
     }
    
+}
+
+export const GoogleAuth = async (req, res) => {
+    // console.log(req.body.credential) 
+    
+    async function verify() {
+        const ticket = await client.verifyIdToken({
+            idToken: req.body.credential,
+            audience: process.env.GOOGLE_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+            // Or, if multiple clients access the backend:
+            //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+        });
+        const payload = ticket.getPayload();
+        const userid = payload['sub'];
+        
+        const {email,name,sub} = payload
+
+        var userdata ={
+            email,
+            name,
+            "password":userid
+        }
+
+        const oldUser = await UserModel.findOne({ email })
+       
+        if(oldUser !=null ){
+            console.log(oldUser,"old")
+            res.status(200).json(oldUser)
+        }else{
+            try {
+                const create = await UserModel.create(userdata)
+                // const user = await newUser.save() 
+                console.log(create,"created")
+            res.status(201).json(user)
+            } catch (error) {
+                res.status(500).json(error)
+            }
+        }
+
+      }
+      verify().catch(console.error);
+
+
 }

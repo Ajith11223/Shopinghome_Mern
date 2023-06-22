@@ -77,20 +77,27 @@ export const Data = [
         "name":"Iphone 14 Pro",
         "img":"https://imageio.forbes.com/specials-images/imageserve/641397e79f04500b85460b8f/0x0.jpg?format=jpg&crop=1149,647,x248,y0,safe&width=1200",
         "price":"$ 300",
-        "location":"Dubai"
+        "location":"Dubai bbnnn"
     },
     {
         "name":"Iphone 14 Pro",
         "img":"https://imageio.forbes.com/specials-images/imageserve/641397e79f04500b85460b8f/0x0.jpg?format=jpg&crop=1149,647,x248,y0,safe&width=1200",
         "price":"$ 300",
-        "location":"Dubai"
+        "location":"Dubai new One"
     },
     {
         "name":"Iphone 14 Pro",
         "img":"https://imageio.forbes.com/specials-images/imageserve/641397e79f04500b85460b8f/0x0.jpg?format=jpg&crop=1149,647,x248,y0,safe&width=1200",
         "price":"$ 300",
-        "location":"Dubai"
+        "location":"Dubai new two"
     },
+    {
+        "name":"Iphone 14 Pro",
+        "img":"https://imageio.forbes.com/specials-images/imageserve/641397e79f04500b85460b8f/0x0.jpg?format=jpg&crop=1149,647,x248,y0,safe&width=1200",
+        "price":"$ 300",
+        "location":"Dubai new two"
+    },
+  
     
 
 ]

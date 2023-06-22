@@ -1,34 +1,97 @@
-import React from 'react'
+import React, { useState } from 'react';
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl,
+  CarouselIndicators,
+  CarouselCaption,
+} from 'reactstrap';
 
-const Carosel = () => {
+const items = [
+  {
+    src: 'https://picsum.photos/id/123/1200/400',
+    altText: 'New Product 1',
+    caption: 'Tv',
+    key: 1,
+  },
+  {
+    src: 'https://picsum.photos/id/456/1200/400',
+    altText: 'New Product 2',
+    caption: 'Watch 2',
+    key: 2,
+  },
+  {
+    src: 'https://picsum.photos/id/678/1200/400',
+    altText: 'New Product 3',
+    caption: 'Phone 3',
+    key: 3,
+  },
+];
+
+function Carosel(args) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  const next = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    setActiveIndex(nextIndex);
+  };
+
+  const previous = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    setActiveIndex(nextIndex);
+  };
+
+  const goToIndex = (newIndex) => {
+    if (animating) return;
+    setActiveIndex(newIndex);
+  };
+
+  const slides = items.map((item) => {
     return (
-        <div id="carouselExampleIndicators " className="carousel slide " data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img  src="https://www.ong-sounyegnon.org/images/slider/slider1.jpg" class="d-block w-100 " style={{height:"512px"}} alt="..." />
-    </div>
-    <div class="carousel-item">
-      <img src="https://www.ong-sounyegnon.org/images/slider/slider1.jpg" class="d-block w-100 " style={{height:"512px",objectFit:"cover"}} alt="..." />
-    </div>
-    <div class="carousel-item">
-      <img src="https://www.ong-sounyegnon.org/images/slider/slider1.jpg" class="d-block w-100" style={{height:"200px",objectFit:"cover"}} alt="..." />
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-    )
+      <CarouselItem
+        onExiting={() => setAnimating(true)}
+        onExited={() => setAnimating(false)}
+        key={item.src}
+      >
+        <div style={{textAlign:"center"}}>
+        <img src={item.src} alt={item.altText} style={{borderRadius:"10px",width:"80%"}} />
+        </div>
+        <CarouselCaption
+          captionText={item.caption}
+          captionHeader={item.caption}
+        />
+      </CarouselItem>
+    );
+  });
+
+  return (
+    <Carousel
+      activeIndex={activeIndex}
+      next={next}
+      previous={previous}
+      {...args}
+    >
+      <CarouselIndicators
+        items={items}
+        activeIndex={activeIndex}
+        onClickHandler={goToIndex}
+      />
+      {slides}
+      <CarouselControl
+        direction="prev"
+        directionText="Previous"
+        onClickHandler={previous}
+      />
+      <CarouselControl
+        direction="next"
+        directionText="Next"
+        onClickHandler={next}
+      />
+    </Carousel>
+  );
 }
 
-export default Carosel
+export default Carosel;

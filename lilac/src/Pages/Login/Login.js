@@ -1,13 +1,49 @@
 import React, { useState } from 'react'
-import { LoginUser } from '../../ApiCall/Api'
+import { LoginUser, googleResponse } from '../../ApiCall/Api'
+import { Link } from 'react-router-dom'
+
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+
+
+
+
+
+  function Google(){
+  return(
+    <>
+    <GoogleOAuthProvider clientId="572559618246-c7c7eo18rgj40uvardjue8j5dp6obuer.apps.googleusercontent.com">
+
+      <GoogleLogin
+      
+      onSuccess={credentialResponse => {
+        // responseGoogle(credentialResponse.credential);
+      const data = googleResponse(credentialResponse).then((res)=>{
+        
+        localStorage.setItem("user",JSON.stringify(res.data))
+        return res.data
+        // setLogedUser(res.data)
+      }).catch((err)=>{
+        console.log(err)
+      })
+      
+      }}
+      onError={() => {
+        console.log('Login Failed');
+      }}
+      />
+      </GoogleOAuthProvider>
+    </>
+  )
+}
 
 const Login = ({setLogedUser}) => {
+  setLogedUser(Google())
 
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
 
   const [err,setErr]=useState({})
-
 
 //login
 const handleLogin =async()=>{
@@ -35,7 +71,7 @@ const handleLogin =async()=>{
 
   return (
     <div  className='bg-secondary d-flex align-items-center justify-content-center ' style={{height:"100vh"}}>
-        <div className='d-flex align-items-center justify-content-center flex-column' style={{backgroundColor:"white",width:"500px",height:"280px",borderRadius:"10px"}}>
+        <div className='d-flex align-items-center justify-content-center flex-column' style={{backgroundColor:"white",width:"400px",height:"320px",borderRadius:"10px"}}>
 
            <div style={{textAlign:"center",color:"black"}} className=''>
            <h3>Login</h3>
@@ -53,17 +89,23 @@ const handleLogin =async()=>{
             {
               err ? <span style={{color:"red"}}>{err.message}</span> :""
             }
+
+            <div className='mt-2'>
+            <span >Not Register <Link to={'/sign'}>Sign Up</Link></span>
+            </div>
             
             <div className='mt-2 ' style={{textAlign:"end"}}>
             <button className='btn btn-success btn-sm' onClick={handleLogin}>Login</button>
              </div>
            </div>
            <div className='d-flex gap-4'>
+            {/* <Link to={'/sign'} >
            <button className='btn btn-info  btn-sm'> Sign Up</button>
-           <button className='btn btn-primary  btn-sm'> Login with Google</button>
+            </Link> */}
+           {/* <button className='btn btn-primary  btn-sm'> Login with Google</button> */}
            </div>
 
-
+           <Google/>
        
         </div>
     </div>
