@@ -37,12 +37,12 @@ const Navbar = ({cartData,setRefresh}) => {
 
                 {/* modal */}
                 <Modal isOpen={modal} size='xl' toggle={toggle} >
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>Product Cart</ModalHeader>
         <ModalBody>
         <div className=' d-flex align-items-center justify-content-center gap-3 flex-wrap'>
 
 {
-    cartData?.map((item) => {
+  cartData.length != 0? cartData?.map((item) => {
         return (
             <>
                 <div class="card mb-3" style={{ maxWidth: "240px" }}>
@@ -72,7 +72,7 @@ const Navbar = ({cartData,setRefresh}) => {
                 </div>
             </>
         )
-    })
+    }) : <h4>Cart Empty</h4>
 }
 
 </div>
