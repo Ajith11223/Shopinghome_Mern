@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AuthContext from '../../Context/AuthContext'
 
-const Header = ({setLogedUser}) => {
+
+const Header = () => {
+
+    const {setLogin}=useContext(AuthContext)
 
     // logout
     const handleLogOut =()=>{
-        localStorage.clear('user')
-        setLogedUser({})
+        setLogin(false)
+        localStorage.clear("user")
     }
     return (
         <div className='bg-primary d-flex align-items-center justify-content-around' style={{ height: "40px", color: "white" }}>

@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 
-
+import { useContext } from 'react';
+import AuthContext from '../../Context/AuthContext';
 
 
 
   function Google(){
+    const {login,setLogin} =useContext(AuthContext)
   return(
     <>
     <GoogleOAuthProvider clientId="572559618246-c7c7eo18rgj40uvardjue8j5dp6obuer.apps.googleusercontent.com">
@@ -19,6 +21,9 @@ import { GoogleLogin } from '@react-oauth/google';
       onSuccess={credentialResponse => {
         // responseGoogle(credentialResponse.credential);
       const data = googleResponse(credentialResponse).then((res)=>{
+        if(data){
+          setLogin(true)
+        }
         
         localStorage.setItem("user",JSON.stringify(res.data))
         return res.data
@@ -37,13 +42,19 @@ import { GoogleLogin } from '@react-oauth/google';
   )
 }
 
-const Login = ({setLogedUser,setUser}) => {
-  setLogedUser(Google())
+const Login = () => {
+
+  const {login,setLogin} =useContext(AuthContext)
+  // setLogedUser(Google())
 
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
 
   const [err,setErr]=useState({})
+
+
+  
+
 
 //login
 const handleLogin =async()=>{
@@ -54,9 +65,14 @@ const handleLogin =async()=>{
     }
     if(email.length != 0 && password.length != 0){
       const data= await LoginUser(logData)
+
+      if(data?.data?.data){
+        setLogin(true)
+      }
+
       localStorage.setItem("user",JSON.stringify(data?.data?.data))
-      setLogedUser(data?.data?.data)
-      setUser(data?.data?.data)
+      // setLogedUser(data?.data?.data)
+      // setUser(data?.data?.data)
     }else{
       setErr({message:"Please fill field"})
     }
