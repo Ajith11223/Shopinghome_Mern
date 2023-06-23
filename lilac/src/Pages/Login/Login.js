@@ -37,7 +37,7 @@ import { GoogleLogin } from '@react-oauth/google';
   )
 }
 
-const Login = ({setLogedUser}) => {
+const Login = ({setLogedUser,setUser}) => {
   setLogedUser(Google())
 
   const [email,setEmail]=useState('')
@@ -56,6 +56,7 @@ const handleLogin =async()=>{
       const data= await LoginUser(logData)
       localStorage.setItem("user",JSON.stringify(data?.data?.data))
       setLogedUser(data?.data?.data)
+      setUser(data?.data?.data)
     }else{
       setErr({message:"Please fill field"})
     }

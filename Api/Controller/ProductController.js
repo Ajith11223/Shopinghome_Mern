@@ -9,6 +9,7 @@ export const ProductCreate =async(req,res)=>{
         const create = await ProductModal.create(product)
         res.status(200).json({ create })
     } catch (error) {
+        console.log(error,"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
         res.status(500).json({ error })
     }
     

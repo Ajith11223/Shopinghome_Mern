@@ -78,6 +78,7 @@ const Product = ({setRefresh,refresh}) => {
                 const data = await ProductCreate(productData)
                 if (data) {
                     setModal(false)
+                    setRefresh((pre)=> pre + 1)
                 }
 
             } catch (error) {

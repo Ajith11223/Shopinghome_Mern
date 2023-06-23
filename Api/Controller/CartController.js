@@ -14,6 +14,7 @@ export const CartCreate =async(req,res)=>{
             const cartData={
                 qty,productName,price,imgLink,"productId":_id
             }
+            
             const updateData = await ProductModal.findByIdAndUpdate(_id, req.body, { new: true })
             const createCart =await CartModal.create(cartData) 
             res.status(200).json({updateData})
