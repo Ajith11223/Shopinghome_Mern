@@ -110,7 +110,7 @@ const Product = ({setRefresh,refresh}) => {
     return (
         <div className='  flex-column mt-5 '>
             <div className='d-flex align-items-center justify-content-around'>
-                <div style={{ position: "relative", right: "270px" }} className='p-2'>
+                <div  className='p-2'>
                     <span style={{ fontSize: "30px", fontWeight: "600" }}>Best Deal</span>
                     <div>
 
@@ -166,7 +166,7 @@ const Product = ({setRefresh,refresh}) => {
 
                     </div>
                 </div>
-                <div style={{ position: "relative", left: "270px", color: "blue" }} className='p-2'>
+                <div style={{ color: "blue" }} className='p-2'>
                     <span>view All</span>
                 </div>
             </div>
@@ -179,7 +179,7 @@ const Product = ({setRefresh,refresh}) => {
                                 <div class="card mb-3" style={{ maxWidth: "240px" }}>
                                     <div class="row g-0">
                                         <div class="col-md-4">
-                                            <img style={{ width: "147px", height: "109px", objectFit: "cover" }} src={item.imgLink} class="img-fluid rounded-start" alt="..." />
+                                            <img style={{ width: "147px", height: "109px" }} src={item.imgLink} class="img-fluid rounded-start" alt="..." />
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
