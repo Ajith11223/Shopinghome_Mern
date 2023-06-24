@@ -12,7 +12,7 @@ const Header = () => {
         localStorage.clear("user")
     }
     return (
-        <div className='bg-primary d-flex align-items-center justify-content-around' style={{ height: "40px", color: "white" }}>
+        <div className='bg-primary d-flex align-items-center justify-content-around flex-wrap' style={{ minHeight: "40px", color: "white" }}>
             <div className='d-flex gap-3'>
                 <div className='d-flex gap-2'>
                     <i className="bi bi-telephone size-10" ></i>
