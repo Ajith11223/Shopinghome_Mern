@@ -27,8 +27,8 @@ const Navbar = ({cartData,setRefresh}) => {
 
     }
     return (
-        <div className='d-flex flex-column align-items-center justify-content-center'>
-            <div className='d-flex align-items-center justify-content-center gap-5' style={{ height: "80px", color: "white", backgroundColor: "white" }}>
+        <div className='d-flex flex-column align-items-center justify-content-center mt-2'>
+            <div className='d-flex align-items-center justify-content-center gap-4 flex-wrap ' style={{ minHeight: "80px", color: "white", backgroundColor: "white" }}>
                 {/* top */}
                 <div className='d-flex gap-2'>
                     <i class="bi bi-exclude" style={{ color: "blue" }}></i>
@@ -137,7 +137,7 @@ const Navbar = ({cartData,setRefresh}) => {
                 </div>
 
                 <div className='mt-1'>
-                    <ul className='d-flex gap-3' style={{listStyle:"none"}}>
+                    <ul className='d-flex gap-3 flex-wrap' style={{listStyle:"none"}}>
                         <li>Books</li>
                         <li>Electronics</li>
                         <li>Real Estate</li>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <div className='mt-5 d-flex align-items-center justify-content-center gap-5 p-3'>
+        <div className='mt-5 d-flex align-items-center justify-content-center gap-5 p-3 flex-wrap'>
             <div className='d-flex gap-3 flex-column' style={{width:"300px"}}>
                 <div className='d-flex gap-2'>
                     <i class="bi bi-exclude" style={{ color: "blue" }}></i>
